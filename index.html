@@ -1,20 +1,92 @@
-<!doctype html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./assets/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #0f172a; color: #fff; }
+    header { display: flex; justify-content: space-between; padding: 20px 50px; background: #020617; position: sticky; top: 0; }
+    header h1 { color: #38bdf8; }
+    nav a { margin: 0 15px; color: white; text-decoration: none; }
+    nav a:hover { color: #38bdf8; }
 
-    <!-- Font Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <title>Ris Portofolio</title>
-    <script type="module" crossorigin src="./assets/index-oCE27qjr.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BZj7g22U.css">
-  </head>
-  <body class = "bg-zinc-900 text-white" id="home">
-    <div id="root"></div>
-  </body>
+    section { padding: 60px 50px; }
+
+    .hero { display: flex; align-items: center; justify-content: space-between; }
+    .hero-text h2 { font-size: 40px; }
+    .hero-text span { color: #38bdf8; }
+    .btn { background: #38bdf8; padding: 10px 20px; border-radius: 10px; color: black; text-decoration: none; display: inline-block; margin-top: 20px; }
+
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .card { background: #1e293b; padding: 20px; border-radius: 15px; transition: 0.3s; }
+    .card:hover { transform: translateY(-10px); }
+
+    .contact input, .contact textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 10px; border: none; }
+    footer { text-align: center; padding: 20px; background: #020617; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MyPortfolio</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <div class="hero-text">
+    <h2>Hello, I'm <span>Your Name</span></h2>
+    <p>UI/UX Designer & Developer</p>
+    <a href="#projects" class="btn">View Work</a>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About Me</h2>
+  <p>I am an Electronics and Communication Engineering student passionate about UI/UX design and web development.</p>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="card">
+      <h3>Project 1</h3>
+      <p>Short description of your project.</p>
+    </div>
+    <div class="card">
+      <h3>Project 2</h3>
+      <p>Short description of your project.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Contact Me</h2>
+  <input type="text" placeholder="Your Name">
+  <input type="email" placeholder="Your Email">
+  <textarea rows="5" placeholder="Your Message"></textarea>
+  <button class="btn">Send</button>
+</section>
+
+<footer>
+  <p>© 2026 Your Name</p>
+</footer>
+
+<script>
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
 </html>

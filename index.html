@@ -1,156 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background: #0f172a; color: #fff; scroll-behavior: smooth; }
-
-    header { display: flex; justify-content: space-between; padding: 20px 50px; background: #020617; position: sticky; top: 0; z-index: 1000; }
-    header h1 { color: #38bdf8; }
-    nav a { margin: 0 15px; color: white; text-decoration: none; position: relative; }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background: #38bdf8;
-      transition: 0.3s;
-    }
-
-    nav a:hover::after { width: 100%; }
-
-    section { padding: 80px 50px; }
-
-    .hero { display: flex; align-items: center; justify-content: space-between; min-height: 80vh; }
-
-    .hero-text h2 { font-size: 45px; }
-    .hero-text span { color: #38bdf8; }
-
-    .btn {
-      background: #38bdf8;
-      padding: 12px 25px;
-      border-radius: 10px;
-      color: black;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 20px;
-      transition: 0.3s;
-    }
-
-    .btn:hover { transform: scale(1.1); }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 15px;
-      transition: 0.4s;
-    }
-
-    .card:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 10px 30px rgba(56,189,248,0.3);
-    }
-
-    .contact input, .contact textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: none;
-    }
-
-    footer { text-align: center; padding: 20px; background: #020617; }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <h1>MyPortfolio</h1>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<section id="home" class="hero">
-  <div class="hero-text" data-aos="fade-right">
-    <h2>Hello, I'm <span>Your Name</span></h2>
-    <p>UI/UX Designer & Developer</p>
-    <a href="#projects" class="btn">View Work</a>
-  </div>
-</section>
-
-<section id="about" data-aos="fade-up">
-  <h2>About Me</h2>
-  <p>I am an Electronics and Communication Engineering student passionate about UI/UX design and web development.</p>
-</section>
-
-<section id="projects">
-  <h2 data-aos="fade-up">Projects</h2>
-  <div class="projects">
-
-    <div class="card" data-aos="zoom-in">
-      <h3>Wildfire Tracker</h3>
-      <p>Real-time wildfire tracking using maps and API.</p>
-    </div>
-
-    <div class="card" data-aos="zoom-in" data-aos-delay="200">
-      <h3>UI/UX Case Study</h3>
-      <p>Designed mobile app interface with user research.</p>
-    </div>
-
-  </div>
-</section>
-
-<section id="contact" class="contact" data-aos="fade-up">
-  <h2>Contact Me</h2>
-  <input type="text" placeholder="Your Name">
-  <input type="email" placeholder="Your Email">
-  <textarea rows="5" placeholder="Your Message"></textarea>
-  <button class="btn">Send</button>
-</section>
-
-<footer>
-  <p>© 2026 Your Name</p>
-</footer>
-
-<!-- AOS Script -->
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-
-<script>
-  AOS.init({
-    duration: 1000,
-    once: true
-  });
-
-  document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-</script>
-
-</body>
+    <!-- Font Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Ris Portofolio</title>
+    <script type="module" crossorigin src="./assets/index-oCE27qjr.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BZj7g22U.css">
+  </head>
+  <body class = "bg-zinc-900 text-white" id="home">
+    <div id="root"></div>
+  </body>
 </html>

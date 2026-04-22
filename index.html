@@ -1,29 +1,117 @@
-<!doctype html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import * as THREE from "three";
 
-    <!-- Google Font: Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Title -->
-    <title>Ris Portfolio</title> 
+export default function Portfolio() {
+  const [repos, setRepos] = useState([]);
+  const [message, setMessage] = useState("");
+  const [chat, setChat] = useState([]);
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="./assets/index-BZj7g22U.css">
+  // GitHub fetch
+  useEffect(() => {
+    fetch("https://api.github.com/users/YOUR_GITHUB_USERNAME/repos")
+      .then((res) => res.json())
+      .then((data) => setRepos(data.slice(0, 6)))
+      .catch(() => {});
+  }, []);
 
-    <!-- JS -->
-    <script type="module" src="./assets/index-oCE27qjr.js"></script>
-  </head>
+  // Three.js background
+  useEffect(() => {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
 
-  <body class="bg-zinc-900 text-white" id="home">
-    <div id="root"></div>
-  </body>
-</html>
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById("bg")?.appendChild(renderer.domElement);
+
+    const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
+    const material = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true });
+    const torus = new THREE.Mesh(geometry, material);
+
+    scene.add(torus);
+    camera.position.z = 30;
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      torus.rotation.x += 0.01;
+      torus.rotation.y += 0.005;
+      renderer.render(scene, camera);
+    };
+
+    animate();
+  }, []);
+
+  // Fake AI chatbot (can connect OpenAI later)
+  const sendMessage = () => {
+    if (!message) return;
+
+    const userMsg = { role: "user", text: message };
+    const botMsg = {
+      role: "bot",
+      text: "I'm your portfolio AI assistant. Connect OpenAI API for smart replies!"
+    };
+
+    setChat([...chat, userMsg, botMsg]);
+    setMessage("");
+  };
+
+  return (
+    <div className="bg-black text-white min-h-screen overflow-hidden relative">
+      {/* 3D BACKGROUND */}
+      <div id="bg" className="absolute top-0 left-0 w-full h-full -z-10" />
+
+      {/* HERO */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-center pt-32"
+      >
+        <h1 className="text-5xl font-bold">Sanjeev M</h1>
+        <p className="text-blue-400 mt-2">FAANG-Level Portfolio</p>
+      </motion.div>
+
+      {/* PROJECTS (GitHub Auto Fetch) */}
+      <div className="p-10">
+        <h2 className="text-2xl font-bold mb-4">GitHub Projects</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {repos.map((repo, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="p-4 bg-gray-900 rounded-xl"
+            >
+              <h3 className="font-bold">{repo.name}</h3>
+              <p className="text-sm text-gray-400">{repo.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* CHATBOT */}
+      <div className="p-10">
+        <h2 className="text-2xl font-bold mb-4">AI Chatbot</h2>
+
+        <div className="bg-gray-900 p-4 rounded-xl h-64 overflow-auto">
+          {chat.map((c, i) => (
+            <p key={i} className={c.role === "user" ? "text-blue-400" : "text-green-400"}>
+              {c.text}
+            </p>
+          ))}
+        </div>
+
+        <div className="flex mt-2">
+          <input
+            className="flex-1 p-2 text-black"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Ask something..."
+          />
+          <button onClick={sendMessage} className="bg-blue-500 px-4">
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
